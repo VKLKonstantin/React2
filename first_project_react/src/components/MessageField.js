@@ -11,6 +11,7 @@ export default class MessageField extends React.Component{
           {text:"What is your name?"},
         ]
       }
+      
     handleClick =()=>{
         this.setState({messages:[...this.state.messages]})
     }
