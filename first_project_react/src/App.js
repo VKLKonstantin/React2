@@ -1,27 +1,42 @@
 import './App.css';
 import React from 'react'
+import Child from './Child.js'
+export default class App extends React.Component {
+  state = {
+  text: 'Наш первый React-компонент',
+  counter:0,
 
-const Button = (props) =>{
-  const {text,handlerClick} = props
-  return <button onClick={handlerClick}>{text}</button>
-}
-const MessageWrapper = props=>{
-  return props.messages.map(messageItem =><div>{messageItem}</div>)
-}
-function App(){
-  let [messages, setMessages] = React.useState(["Hello!"])
-  const onButtonClick = () => {
-      console.log('clicked!', { messages })
-      setMessages([...messages, 'Hello again!'])
-  }
-  
-return (
-  <div className="App"> 
-<MessageWrapper messages={messages} />
-        <button onClick={onButtonClick}>My button</button>
-  </div>
- )
-}
+};
 
 
-export default App;
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+    }
+  componentWillMount() {
+    console.log('componentWillMount');
+    }
+    componentDidMount() {
+    console.log('componentDidMount');
+
+    setTimeout(() => this.setState({'text': 'Обновленный React-компонент'}),
+    1000);
+    }
+    handleClick =()=>{
+this.setState({"counter":this.state.counter+1})
+    }
+
+    render() {
+    console.log('render');
+    return (
+<div>
+<h1>{this.state.text}</h1>
+        <Child counter={this.state.counter}/>
+        <button onClick={this.handleClick}>+1</button>
+</div>
+
+    
+    )
+    }
+
+}
+
